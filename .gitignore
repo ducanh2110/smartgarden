@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+=======
+target
+build
+.gradle
+.classpath
+.project
+.settings
+>>>>>>> d14b5bd8553d8d8db063984f9d44cf8abc003025

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LED for ESP8266</title>
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:replace="layout/navbar :: navbar"></div>
+	
+	<h1 id="device-id" th:value="${device.Id}" th:text="${device.name}"></h1>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-8 col-md-offset-2">
+			<button onclick="turnLight(true)"
+				class="btn btn-success btn-block btn-lg">Turn On</button>
+			<br />
+			<button onclick="turnLight(false)"
+				class="led btn btn-danger btn-block btn-lg">Turn Off</button>
+			<br />
+			<div id="light-status" class="well"
+				style="margin-top: 5px; text-align: center"></div>
+		</div>
+
+		<input type="text" value="" id="dial" />
+	</div>
+
+	<script
+		src="https://rawgit.com/aterrien/jQuery-Knob/master/dist/jquery.knob.min.js"></script>
+	<script>
+		$(function() {
+			$('#dial').knob({
+				'min' : 10,
+				'max' : 255,
+				'width' : 200,
+				'height' : 200,
+				'displayInput' : true,
+				'fgColor' : "#FF0000",
+				'release' : function(value) {
+					var deviceId = $("#device-id").attr("value");
+					$.ajax({
+						url : "/device/" + deviceId + "?brightness=" + value,
+						type : "PUT",
+						success : function(res) {
+							console.log(res);
+						}
+					});
+				}
+			});
+		});
+
+		function turnLight(turn) {
+			var deviceId = $("#device-id").attr("value");
+			$.ajax({
+				url : "/device/" + deviceId + "?light=" + turn,
+				type : "PUT",
+				success : function(res) {
+					$("#light-status").text(res);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

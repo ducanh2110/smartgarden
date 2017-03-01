@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<nav class="navbar navbar-default" th:fragment="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WebSiteName</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/device/list" th:href="@{/device/list}">Home</a></li>
+				<li class="active"><a href="/led/list" th:href="@{/led/list}">List Leds</a></li>
+				<li><a href="/led/create" th:href="@{/led/create}">Create Led</a></li>
+			</ul>
+		</div>
+	</nav>
+</body>
+</html>

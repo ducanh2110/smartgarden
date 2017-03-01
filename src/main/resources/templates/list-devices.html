@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LED for ESP8266</title>
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" th:src="@{/webjars/jquery/3.1.1-1/jquery.min.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+	th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div th:replace="layout/navbar :: navbar"></div>
+
+	<div class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Light</th>
+					<th>Brightness</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="device, idx : ${devices}">
+					<td th:text="${{idx.index + 1}}"></td>
+					<td><a th:href="@{/device/} + ${device.Id}"
+						th:text="${{device.name}}"></a></td>
+					<td th:text="${{device.turnLight}}"></td>
+					<td th:text="${{device.brightness}}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
